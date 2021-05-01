@@ -1,25 +1,29 @@
 from django.db import models
-from django.core.validators import MinLengthValidator
+from django import forms
 
 # Create your models here.
 
-LANGUAGE_CHOICES = (
-    ('java', 'Java'),
-    ('c', 'C'),
-    ('py', 'Python'),
-)
-
 class User(models.Model):
-    name = models.CharField(max_length = 255)
-    password = models.CharField(max_length = 100, validators = [MinLengthValidator(6)])
+    name = models.CharField(max_length=255)
     email = models.EmailField()
 
+    def __str__(self):
+        return f"{self.name} ({self.email})"
+
+
 class Language(models.Model):
-    language = models.CharField(max_length = 4, choices = LANGUAGE_CHOICES,default = 'py')
-    image_id = models.CharField(max_length = 100)
+    name = models.CharField(max_length=255, default='Python')
+    image_id = models.CharField(max_length=255, default='codercom/code-server')
+
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Project(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    language = models.ForeignKey(Language, on_delete = models.CASCADE, default = 'py')
-    name = models.CharField(max_length = 255)
-    volume_id = models.CharField(max_length = 100)
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
+    volume_id = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} by {self.user}"
