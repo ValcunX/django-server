@@ -2,8 +2,15 @@
 
 ## Installation
   * Activate VirtualEnv
+    
+    For macOS\Linux:
     ```
     $ source venv/bin/activate
+    ```
+
+    For the other thing:
+    ```
+    $ venv\Scripts\activate
     ```
 
   * Install required packages
