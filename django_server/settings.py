@@ -10,9 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+from pymongo.mongo_client import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -80,6 +84,7 @@ DATABASES = {
          'NAME': 'valcunx',
      }
 }
+MongoClient.HOST = f"mongodb+srv://{os.getenv('MONGO_USER')}:{os.getenv('MONGO_PWD')}@cluster0.cxz7w.mongodb.net/"
 
 
 # Password validation
