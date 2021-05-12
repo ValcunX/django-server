@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.utils import timezone
 
 # Create your models here.
 
@@ -24,6 +25,7 @@ class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
     volume_id = models.CharField(max_length=100)
+    last_mdate = models.DateTimeField(default = timezone.now)
 
     def __str__(self):
         return f"{self.name} by {self.user}"
