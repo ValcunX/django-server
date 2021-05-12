@@ -10,7 +10,7 @@ class LanguageSerializer(serializers.HyperlinkedModelSerializer):
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('name', 'user', 'language', 'volume_id')
+        fields = ('name', 'user', 'language', 'volume_id', 'last_mdate')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
