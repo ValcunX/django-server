@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-jtej02v1eo#0%h55d&09cx9u*va_cxv9l^a#y7^^zblgzf!u&0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -155,4 +155,5 @@ REST_AUTH_SERIALIZERS = {
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-APPEND_SLASH=False
+# Additional Settings
+APPEND_SLASH=True
