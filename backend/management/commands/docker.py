@@ -10,7 +10,7 @@ class Command(BaseCommand):
         cmd.add_argument('--dev', default=False, action='store_true', help='Start Development Container')
         cmd.add_argument('--build', default=False, action='store_true', help='Build Production Container')
         cmd.add_argument('--start', default=False, action='store_true', help='Start Production Container')
-        cmd.add_argument('--stop', default=False, action='store_true', help='Start Production Container')
+        cmd.add_argument('--stop', default=False, action='store_true', help='Stop Production Container')
         cmd.add_argument('--publish', default=False, action='store_true', help='Publish Production Container to Docker Hub')
 
     def handle(self, *args, **kwargs):
