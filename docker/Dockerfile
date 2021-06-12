@@ -29,7 +29,8 @@ ENV PATH $VIRTUAL_ENV/bin:$PATH
 
 EXPOSE 80
 
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic && \
+    rm .env*
 
 CMD ["./start_server.sh"]
 
