@@ -15,11 +15,21 @@ class LanguageViewSet(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
+    def get_serializer_context(self):
+        context = super(LanguageViewSet, self).get_serializer_context()
+        context.update({"request": None})
+        return context
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
+
+    def get_serializer_context(self):
+        context = super(ProjectViewSet, self).get_serializer_context()
+        context.update({"request": None})
+        return context
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -27,10 +37,14 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
+    def get_serializer_context(self):
+        context = super(UserViewSet, self).get_serializer_context()
+        context.update({"request": None})
+        return context
+
     @action(detail=True, methods=['get'])
     def projects(self, request, pk=None):
         user = self.get_object()
         queryset = Project.objects.filter(user=user)
-        serializer = UserProjectSerializer(
-            queryset, many=True, context={'request': request})
+        serializer = UserProjectSerializer(queryset, many=True, context={'request': None})
         return Response(serializer.data)
