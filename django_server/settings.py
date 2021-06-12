@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'django_server.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'djongo',
-         'NAME': 'valcunx',
+         'NAME': os.getenv('MONGO_DB'),
      }
 }
 MongoClient.HOST = f"mongodb+srv://{os.getenv('MONGO_USER')}:{os.getenv('MONGO_PWD')}@cluster0.cxz7w.mongodb.net/"
