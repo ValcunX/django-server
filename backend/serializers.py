@@ -8,19 +8,19 @@ from .models import Language, Project
 class LanguageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Language
-        fields = ('id', 'name', 'image_id')
+        fields = ('id', 'name', 'image_id', 'url')
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'name', 'user', 'language', 'volume_id', 'last_mdate')
+        fields = ('id', 'name', 'user', 'language', 'volume_id', 'last_mdate', 'url')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'url')
 
 
 class TokenSerializer(serializers.ModelSerializer):
@@ -30,6 +30,9 @@ class TokenSerializer(serializers.ModelSerializer):
 
 
 class UserProjectSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer()
+    language = LanguageSerializer()
+
     class Meta:
         model = Project
         fields = ('id', 'name', 'user', 'language', 'volume_id', 'last_mdate')

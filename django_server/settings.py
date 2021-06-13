@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'drf_psq',
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
@@ -174,6 +175,7 @@ logging.config.dictConfig({
 
 # CORS Headers
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Django AllAuth Options
 AUTHENTICATION_BACKENDS = (
@@ -182,6 +184,19 @@ AUTHENTICATION_BACKENDS = (
 )
 REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'backend.serializers.TokenSerializer',
+}
+
+DEFAULT_AUTHENTICATION_CLASSES = [
+    'backend.authentication.BearerAuthentication',
+    'rest_framework.authentication.TokenAuthentication',
+]
+if DEBUG: DEFAULT_AUTHENTICATION_CLASSES.insert(0, 'rest_framework.authentication.BasicAuthentication')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
 }
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
